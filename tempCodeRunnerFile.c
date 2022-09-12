@@ -1,0 +1,1 @@
+(arr[i] != arr[j])&&(arr[i]!=arr[i+1])
