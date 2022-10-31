@@ -1,40 +1,82 @@
 #include <stdio.h>
+
 int main()
 {
-    int lim;
-    printf("ENTER LIMIT : ");
-    scanf("%d", &lim);
-    int arr[lim], dupl_arr[lim],final[lim], i, j, count = 0,flag=0,dup=0;
-    printf("ENTER ELEMENTS : \n");
-    for (i = 0; i < lim; i++)
+    int Arr_1[100], Arr_1_copy[100], Arr_1_Reverse[100];
+    int i, j, elemCount, count = 0;
+    int readIndex, writeIndex, scanIndex, new_count;
+
+    printf("ENTER ARRAY ELEMENTS : \n");
+    scanf("%d", &elemCount);
+    printf("Enter %d numbers\n", elemCount);
+
+    // Read array elements
+    for (i = 0; i < elemCount; i++)
     {
-        scanf("%d", &arr[i]);
+        scanf("%d", &Arr_1[i]);
     }
-    // check for duplicates count
-    for (i = 0; i < lim; i++)
+
+    // Duplicate Elem Read
+    for (i = 0; i < elemCount; i++)
     {
-        for (j = i + 1; j < lim; j++)
+        for (j = i + 1; j < elemCount; j++)
         {
-            if (arr[i] == arr[j])
+            if (Arr_1[i] == Arr_1[j])
             {
-                dupl_arr[dup] = arr[i];
-                dup++;
                 count++;
                 break;
             }
         }
     }
-    // for(i=0;i<dup;i++){
-    //     printf("%d \t",dupl_arr[i]);
-    // }
+    printf("NUMBER OF DUPLICATE ELEMENTS : \n : %d\n", count);
 
-    for(i=0,j=0;i<lim,j<dup;i++,j++){
-        if (arr[i] != dupl_arr[j]){
-            final[i] = arr[i];
+    // Copy Array
+
+    for (i = 0; i < elemCount; i++)
+    {
+        Arr_1_copy[i] = Arr_1[i];
+    }
+
+    printf("ARRAY COPY SUCCESSFUL! \n");
+
+    // Array Display without duplicates
+
+    for (readIndex = 0, writeIndex = 0; readIndex < elemCount; readIndex++)
+    {
+        for (scanIndex = readIndex + 1; scanIndex < elemCount; scanIndex++)
+        {
+            if (Arr_1_copy[scanIndex] == Arr_1_copy[readIndex])  // Detect Duplicate Element
+            {
+                break;
+            }
+        }
+        if (scanIndex == elemCount)
+        {
+            Arr_1_copy[writeIndex] = Arr_1_copy[readIndex];
+            writeIndex++;
         }
     }
-    for(i=0;i<lim;i++){
-        printf("%d \t",final[i]);
+
+    // Print unique elements
+
+    printf("LIST FOR NON DUPLICATES : \n");
+    for (new_count = 0; new_count < writeIndex; new_count++)
+    {
+        printf("%d  ", Arr_1_copy[new_count]);
     }
+
+    // Print Unique Array In Reverse
+
+    for (i = 0; i < new_count; i++)
+    {
+        Arr_1_Reverse[i] = Arr_1_copy[new_count - i - 1];
+    }
+
+    //reverse array
+    printf("\nREVERSED UNIQUE ARRAY : \n");
+    for(i=0;i<new_count;i++){
+        printf("%d \t",Arr_1_Reverse[i]);
+    }
+
     return 0;
 }
